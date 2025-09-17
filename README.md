@@ -2,6 +2,7 @@
 This repository contains a Python script that simulates, plots, and animates the motion of a [Kapitza's Pendulum][https://en.wikipedia.org/wiki/Kapitza%27s_pendulum].
 
 Kapitza's pendulum is a classic physics problem demonstrating how a dynamically stable equilibrium can be created. It shows that an inverted rigid pendulum, which is normally unstable at its upper equilibrium point, can be stabilized by vertically oscillating its pivot point at a high frequency.
+
 ![pi-pi!10-0 10-60-2-g](https://github.com/user-attachments/assets/0bdf0ef2-d6d0-4dae-adf9-fec9bf831e7f)
 
 ## Features
