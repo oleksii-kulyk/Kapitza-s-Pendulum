@@ -12,11 +12,17 @@ Kapitza's pendulum is a classic physics problem demonstrating how a dynamically 
 *   NumPy
 *   SciPy
 *   Matplotlib
+*   ffmpeg (if you want to save the animation)
 
 You can install the required libraries using pip:
 ```bash
-pip install numpy scipy matplotlib
+pip install numpy scipy matplotlib ffmpeg
 ```
+Alternatively:
+```bash
+conda install numpy scipy matplotlib ffmpeg
+```
+
 ## Usage
 1.  Clone the repository:
     ```bash
@@ -39,26 +45,29 @@ pip install numpy scipy matplotlib
     Enter the method you want to use (default is LSODA):
     ```
 
-4.  Upon execution, two Matplotlib windows will open:
+4.  Upon execution, three Matplotlib windows will open:
     *   A plot showing the pendulum's angle and potential energy versus time.
+    *   A phase plot of every position in X-Y plane for the duration of integration.
     *   An animation window displaying the pendulum's movement.
 ## Customization
 You can modify the simulation's parameters by editing the top section of the `Integrator.py` file.
 
 *   **Initial Conditions**:
     ```python
-    # Initial Conditions: phi0, phidot0 (angle, angular velocity)
-    # phi0 = np.pi corresponds to the inverted (upright) position
-    initial = [np.pi, np.pi/100]
+    #Initial Conditions:
+    #phi0 = 0 when pendulum is straight down
+    phi0, phidot0 = "np.pi", "np.pi/3" #in radians and radians per second
     ```
 
 *   **Physical Parameters**:
     ```python
-    # Parameters: amplitude (m), frequency (rad/s), length (m), g (m/s^2)
-    param = [ 0.10, 60, 2, 9.80665]
+    #Parameters: amplitude, freq, length, g
+    a, n, l, g = 0.10, 80, 2, 9.80665 # SI units: meters, Hz, meters, m/s^2
+    #friction coefficient
+    gamma = 0.005 # unitless
     ```
 
 *   **Simulation Duration**:
     ```python
-    # Interval of integration in seconds
-    interval = (0, 200)
+    #interval of integration in seconds, how long to simulate for
+    interval = (0,200) # seconds
