@@ -5,7 +5,7 @@ Kapitza's pendulum is a classic physics problem demonstrating how a dynamically 
 
 ![pi-pi!3-0 1-90-2-0 005-g_LSODA](https://github.com/user-attachments/assets/f2d3410b-65b7-4246-9b0e-329bfdf7f9b3)
 
- System Evolution | System Phase
+ |  |  |
 :-------------------------:|:-------------------------:
 <img width="960" height="720" alt="pi-pi!3-0 1-90-2-0 005-g_LSODA" src="https://github.com/user-attachments/assets/0432c2ea-f141-4c23-8ecd-d413c6644bce" />  |  <img width="960" height="720" alt="Phase-pi-pi!3-0 1-90-2-0 005-g_LSODA" src="https://github.com/user-attachments/assets/ed91f9bc-81fd-4137-b202-313997e22c6d" />
 
