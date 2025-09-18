@@ -14,7 +14,7 @@ phi0, phidot0 = "np.pi", "np.pi/3" #in radians and radians per second
 initial = [eval(phi0), eval(phidot0)]
 
 #Parameters: amplitude, freq, length, g
-a, n, l, g = 0.10, 80, 2, 9.80665 # SI units: meters, Hz, meters, m/s^2
+a, n, l, g = 0.10, 90, 2, 9.80665 # SI units: meters, Hz, meters, m/s^2
 #friction coefficient
 gamma = 0.005 # unitless
 #found stability at: param = [ 0.24, 54, 1, 9.80665] and initial = [np.pi/2, 0]
@@ -30,6 +30,7 @@ integration_method = "LSODA"
 #name template for saving the plot and animation files
 savename = f"pi-pi!3-{a}-{n}-{l}-{gamma}-g_{integration_method}."
 
+###Defining the system of ODEs
 def system(t, X): #X[0] = phi, X[1] = d phi/dt
     Xdot = [[],[]]
     Xdot[0] = X[1]
@@ -42,24 +43,34 @@ def IntegratePlot(system, method, initial, interval):
     
     #setting up the plot
     fig_angle_Epot = plt.figure()
-    ax = fig_angle_Epot.add_subplot()
+    fig_angle_Epot.suptitle("System Evolution")
+    ax = fig_angle_Epot.add_subplot(211)
     ax.grid()
-    ax.set_xlabel(xlabel='Time, s')
-    ax.set_ylabel(ylabel='Angle, rad')
-
+    
     #plotting system properties
-    #potential energy and angle of pendulum
+    #angle of pendulum vs time
+    ax.set_ylabel(ylabel='Angle, rad')
+    ax.plot(solution.t, solution.y[0], color='C0')
+    #potential energy vs time
     Epot = -g *( l * np.cos(solution.y[0]) + a * np.cos(n * solution.t))
-    ax.plot(solution.t, Epot, label='Potential Energy', color='C1', alpha=0.7)
-    ax.plot(solution.t, solution.y[0], label='Angle', color='C0')
-    plt.plot([], [], ' ', label="Integrator: "+method)
-    plt.legend()
+    ax1 = fig_angle_Epot.add_subplot(212, sharex=ax)
+    ax1.grid()
+    ax1.set_ylabel(ylabel='Potential Energy, J')
+    ax1.plot(solution.t, Epot, color='C1', alpha=0.7)
+    ax1.set_xlabel(xlabel='Time, s')
+    '''
+    fig_angle_Epot.text(0.5, -0.5, f"Params: driving amplitude: {a}m, driving frequency:{n}Hz,\n\
+                        pendulum length:{l}m, damping:{gamma} Integrator: {method},\n\
+                        Initial: angle:{phi0}, speed:{phidot0}\n",
+                        ha='center', fontsize=10, transform=ax1.transAxes)
+    '''
     savepath = "./Results/"+savename+"png"
     fig_angle_Epot.savefig(savepath, dpi=300)
 
     # plotting phase space
     fig_x_y = plt.figure()
     ax2 = fig_x_y.add_subplot(autoscale_on=False, xlim=(-1.15*l, 1.15*l), ylim=(-1.15*l, 1.15*l))
+    fig_x_y.suptitle("System Phase Space")
     ax2.set_aspect('equal')
     ax2.grid()
     ax2.set_xlabel(xlabel='x, meters')
